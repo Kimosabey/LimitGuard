@@ -45,8 +45,8 @@ X-RateLimit-Remaining: 9
 Content-Type: application/json
 ```
 **Verify Protocol:**
-- Accessing `http://localhost:4000` should fail or redirect (depending on config).
-- Accessing `https://localhost:4000` works (with cert warning).
+- Accessing `http://localhost:8800` should fail or redirect (depending on config).
+- Accessing `https://localhost:8800` works (with cert warning).
 
 ## 6. ⏳ Precision Timer Verification
 **Goal:** Verify the client receives the exact reset time (TTL).

@@ -66,12 +66,12 @@ node src/scripts/generateCert.js
 ```
 
 ### 3. Run the Stack
-**Backend (Port 3000)**
+**Backend (Port 8800)**
 ```bash
 node src/server.js
 ```
 
-**Frontend Dashboard (Port 3000/3001)**
+**Frontend Dashboard (Port 3300)**
 ```bash
 cd dashboard
 npm run dev

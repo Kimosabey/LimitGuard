@@ -19,7 +19,7 @@ export default function RulesManager({ rules, onUpdate }) {
         try {
             const apiUrl = process.env.NEXT_PUBLIC_API_URL
                 ? `${process.env.NEXT_PUBLIC_API_URL.replace('/api/test', '')}/api/rules`
-                : 'http://localhost:4000/api/rules';
+                : 'http://localhost:8800/api/rules';
 
             await axios.post(apiUrl, formData);
             setEditing(false);

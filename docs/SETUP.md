@@ -52,8 +52,8 @@ NEXT_PUBLIC_API_URL=https://<YOUR_LAN_IP>:4000/api/test
 **1. "SSL Error" or "Privacy Warning"**
 - Since we use **Self-Signed Certificates**, browsers will warn you.
 - **Fix:** Click "Advanced" -> "Proceed to localhost (unsafe)" for **BOTH**:
-    - `https://localhost:3000`
-    - `https://localhost:4000/api/test` (You must visit the API directly once to accept the cert).
+    - `https://localhost:3300`
+    - `https://localhost:8800/api/test` (You must visit the API directly once to accept the cert).
 - **LimitGuard Redis:** `localhost:6380` (Changed from 6379 to avoid conflicts)
 - **Redis Commander:** `http://localhost:8081`
 

@@ -17,8 +17,8 @@ function getLocalIp() {
 }
 
 const LAN_IP = getLocalIp();
-const BE_PORT = 4000;
-const FE_PORT = 3000; // Next.js default
+const BE_PORT = 8800;
+const FE_PORT = 3300; // Avoiding 3000/4000/5000 series conflicts
 
 // 2. Check SSL status
 const hasCert = fs.existsSync('server.key') && fs.existsSync('server.cert');

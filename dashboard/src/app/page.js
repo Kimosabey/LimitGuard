@@ -51,7 +51,7 @@ export default function Dashboard() {
   // Poll for real-time status every 2 seconds
   const fetchStatus = async () => {
     try {
-      const res = await axios.get(process.env.NEXT_PUBLIC_API_URL ? `${process.env.NEXT_PUBLIC_API_URL.replace('/api/test', '')}/api/status` : 'http://localhost:4000/api/status');
+      const res = await axios.get(process.env.NEXT_PUBLIC_API_URL ? `${process.env.NEXT_PUBLIC_API_URL.replace('/api/test', '')}/api/status` : 'http://localhost:8800/api/status');
       if (res.data.success) {
         setMetrics(prev => ({
           ...prev,
@@ -108,7 +108,7 @@ export default function Dashboard() {
   const testSingleRequest = async () => {
     const loadingToast = toast.loading('Testing Request...');
     try {
-      const res = await axios.get(process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api/test');
+      const res = await axios.get(process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8800/api/test');
       syncTimer(res.headers);
       toast.success(
         <span className="flex items-center gap-2">
@@ -166,7 +166,7 @@ export default function Dashboard() {
     let headersCaptured = false;
 
     const requests = Array.from({ length: batchSize }, () =>
-      axios.get(process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api/test')
+      axios.get(process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8800/api/test')
         .then((res) => {
           if (!headersCaptured) {
             syncTimer(res.headers);
