@@ -99,6 +99,7 @@ node src/scripts/loadTest.js
 | **[SETUP.md](./docs/SETUP.md)** | 🛠️ Step-by-step installation & troubleshooting. |
 | **[FLOW.md](./docs/FLOW.md)** | 🌊 Deep dive into Architecture & Atomic Logic. |
 | **[CASES.md](./docs/CASES.md)** | 🧪 QA Playbook & Failure Scenarios. |
+| **[INTERVIEW.md](./docs/INTERVIEW.md)** | 🎙️ Senior QA: "Defend Your Design". |
 
 ## 📂 Project Structure
 ```
