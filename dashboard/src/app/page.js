@@ -77,7 +77,7 @@ export default function Dashboard() {
     <div className="relative flex h-full min-h-screen w-full flex-col group/design-root bg-background text-text-main dark:bg-dark-background dark:text-dark-text-main overflow-x-hidden font-display transition-colors duration-300">
 
       {/* Top Navigation Bar */}
-      <header className="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-border bg-surface dark:border-dark-border dark:bg-dark-background px-6 py-3 lg:px-10 shadow-sm">
+      <header className="sticky top-0 z-50 flex flex-wrap items-center justify-between border-b border-solid border-border bg-surface dark:border-dark-border dark:bg-dark-background px-4 py-3 lg:px-10 shadow-sm gap-4">
         <div className="flex items-center gap-4">
           <div className="flex items-center justify-center size-8 bg-primary/10 rounded-lg text-primary">
             <span className="material-symbols-outlined">shield</span>
@@ -85,40 +85,35 @@ export default function Dashboard() {
           <h2 className="text-text-main dark:text-dark-text-main text-lg font-bold leading-tight tracking-[-0.015em]">LimitGuard</h2>
         </div>
 
-        <div className="hidden md:flex flex-1 justify-end gap-8">
-          <div className="flex items-center gap-6">
-            <a className="text-text-main dark:text-dark-text-main text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Dashboard</a>
-            <a className="text-text-secondary dark:text-dark-text-secondary text-sm font-medium leading-normal hover:text-text-main dark:hover:text-white transition-colors" href="#">Rules</a>
-            <a className="text-text-secondary dark:text-dark-text-secondary text-sm font-medium leading-normal hover:text-text-main dark:hover:text-white transition-colors" href="#">Analytics</a>
-          </div>
-
-          <div className="flex items-center gap-4">
-            {/* SIMULATE ATTACK BUTTON */}
-            <button
-              onClick={launchAttack}
-              disabled={isAttacking}
-              className={clsx(
-                "flex items-center justify-center gap-2 h-9 px-4 rounded-lg text-sm font-bold transition-all shadow-lg",
-                isAttacking
-                  ? "bg-red-500/20 text-red-500 cursor-not-allowed"
-                  : "bg-red-500 hover:bg-red-600 text-white shadow-red-500/20"
-              )}
-            >
-              <span className="material-symbols-outlined text-[18px]">{isAttacking ? 'autorenew' : 'warning'}</span>
-              {isAttacking ? 'Attacking...' : 'Simulate Attack'}
-            </button>
-
-            <button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-9 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary-dark transition-colors shadow-lg shadow-blue-500/20">
-              <span className="truncate">Production - US-East</span>
-              <span className="material-symbols-outlined ml-2 text-[18px]">expand_more</span>
-            </button>
-            <div className="bg-center bg-no-repeat bg-cover rounded-full size-9 border border-border dark:border-dark-border bg-gray-200 dark:bg-gray-700"></div>
-          </div>
+        {/* Desktop Nav */}
+        <div className="hidden md:flex items-center gap-6">
+          <a className="text-text-main dark:text-dark-text-main text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Dashboard</a>
+          <a className="text-text-secondary dark:text-dark-text-secondary text-sm font-medium leading-normal hover:text-text-main dark:hover:text-white transition-colors" href="#">Rules</a>
+          <a className="text-text-secondary dark:text-dark-text-secondary text-sm font-medium leading-normal hover:text-text-main dark:hover:text-white transition-colors" href="#">Analytics</a>
         </div>
 
-        {/* Mobile Menu Icon */}
-        <div className="md:hidden text-text-main dark:text-dark-text-main">
-          <span className="material-symbols-outlined">menu</span>
+        {/* Controls (Visible on Mobile) */}
+        <div className="flex items-center gap-3 ml-auto md:ml-0">
+          {/* SIMULATE ATTACK BUTTON */}
+          <button
+            onClick={launchAttack}
+            disabled={isAttacking}
+            className={clsx(
+              "flex items-center justify-center gap-2 h-9 px-3 sm:px-4 rounded-lg text-xs sm:text-sm font-bold transition-all shadow-lg whitespace-nowrap",
+              isAttacking
+                ? "bg-red-500/20 text-red-500 cursor-not-allowed"
+                : "bg-red-500 hover:bg-red-600 text-white shadow-red-500/20"
+            )}
+          >
+            <span className="material-symbols-outlined text-[16px] sm:text-[18px]">{isAttacking ? 'autorenew' : 'warning'}</span>
+            {isAttacking ? 'Attacking...' : 'Simulate Attack'}
+          </button>
+
+          <button className="hidden sm:flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-9 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary-dark transition-colors shadow-lg shadow-blue-500/20">
+            <span className="truncate">Production - US-East</span>
+            <span className="material-symbols-outlined ml-2 text-[18px]">expand_more</span>
+          </button>
+          <div className="hidden sm:block bg-center bg-no-repeat bg-cover rounded-full size-9 border border-border dark:border-dark-border bg-gray-200 dark:bg-gray-700"></div>
         </div>
       </header>
 
@@ -200,7 +195,7 @@ export default function Dashboard() {
               </div>
 
               {/* Chart Visualization */}
-              <div className="w-full h-[300px]">
+              <div className="w-full h-[200px] sm:h-[300px]">
                 <ResponsiveContainer width="100%" height="100%">
                   <AreaChart data={data}>
                     <defs>
