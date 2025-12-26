@@ -1,0 +1,6 @@
+[dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
+🔒 SSL Certificates loaded.
+🚀 LimitGuard Server running on https://localhost:4000
+📡 Accessible on Network via https://172.23.80.1:4000
+🛡️  Global Rate Limit: 10 req / 60 sec
+✅ [Redis] Connected successfully

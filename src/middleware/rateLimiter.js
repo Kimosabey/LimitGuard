@@ -8,28 +8,36 @@ const LUA_SCRIPT = fs.readFileSync(path.join(__dirname, '../scripts/rateLimit.lu
 /**
  * Distributed Rate Limiter Middleware
  * @param {string} ruleName - Identifier for the limit (e.g., 'global', 'api')
- * @param {number} windowSeconds - Time window in seconds
- * @param {number} limit - Max requests per window
+ * @param {number|function} windowSeconds - Time window in seconds (or function returning it)
+ * @param {number|function} limit - Max requests per window (or function returning it)
  */
 const rateLimiter = (ruleName, windowSeconds, limit) => {
     return async (req, res, next) => {
         const ip = req.ip || req.connection.remoteAddress;
+
+        // Resolve dynamic values if functions are provided
+        const finalWindow = typeof windowSeconds === 'function' ? windowSeconds() : windowSeconds;
+        const finalLimit = typeof limit === 'function' ? limit() : limit;
+
         const key = `ratelimit:${ruleName}:${ip}`;
 
         try {
             // EXECUTE ATOMIC LUA SCRIPT
-            // eval(script, numKeys, key, arg1, arg2)
-            const allowed = await redis.eval(LUA_SCRIPT, 1, key, windowSeconds, limit);
+            // Returns: [allowed (0/1), currentCount, ttl]
+            const [allowed, currentCount, ttl] = await redis.eval(LUA_SCRIPT, 1, key, finalWindow, finalLimit);
+
+            // Add headers for visibility
+            res.setHeader('X-RateLimit-Limit', finalLimit);
+            res.setHeader('X-RateLimit-Window', finalWindow);
+            res.setHeader('X-RateLimit-Remaining', Math.max(0, finalLimit - currentCount));
+            res.setHeader('X-RateLimit-Reset', ttl);
 
             if (allowed === 1) {
-                // Add headers for visibility
-                res.setHeader('X-RateLimit-Limit', limit);
-                res.setHeader('X-RateLimit-Window', windowSeconds);
                 next();
             } else {
                 res.status(429).json({
                     error: 'Too Many Requests',
-                    message: `Rate limit exceeded. Try again in ${windowSeconds} seconds.`
+                    message: `Rate limit exceeded. Try again in ${ttl} seconds.`
                 });
             }
         } catch (error) {

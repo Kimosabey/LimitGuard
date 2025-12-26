@@ -8,29 +8,20 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                // Shared
                 "primary": "#137fec",
-                "primary-dark": "#1d4ed8", // Hover state for light mode
-
-                // Light Mode Defaults (Slate-based)
-                "background": "#f8fafc",
-                "surface": "#ffffff",
-                "border": "#e2e8f0",
-                "text-main": "#0f172a",
-                "text-secondary": "#64748b",
-
-                // Dark Mode Overrides (Deep Blue/Grey)
-                "dark-background": "#101922",
-                "dark-surface": "#233648",
-                "dark-border": "#344d66",
-                "dark-text-main": "#ffffff",
-                "dark-text-secondary": "#92adc9"
+                "background": "#f8fafc", // Added for compatibility
+                "text-main": "#0f172a",   // Added for compatibility
+                "background-light": "#f6f7f8",
+                "background-dark": "#101922",
+                "surface-dark": "#233648",
+                "text-secondary": "#92adc9",
+                "dark-background": "#101922", // Added for compatibility
+                "dark-text-main": "#ffffff"   // Added for compatibility
             },
             fontFamily: {
                 "display": ["Inter", "sans-serif"]
             },
         },
     },
-    darkMode: "class",
     plugins: [],
 };

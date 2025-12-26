@@ -13,7 +13,8 @@ Traditional rate limiters suffer from **race conditions** (`GET` then `INCR`).
 - **⚛️ Atomic Operations:** 0% race conditions. Verified with `autocannon` (100 concurrent connections).
 - **🕸️ Fail-Open Strategy:** If Redis crashes, the system degrades gracefully (allows traffic) instead of causing a widespread outage.
 - **🔒 End-to-End Encryption:** Fully secured with Self-Signed HTTPS (TLS 1.2+) for both API and Dashboard.
-- **📊 Hacker Dashboard:** Real-time visualization of traffic spikes and blocked requests.
+- **⏳ Precision Timer:** Propagates Redis TTL to the frontend for real-time "Reset Countdown" timers.
+- **📊 Hacker Dashboard:** Real-time visualization of traffic spikes, blocked requests, and Geo-Map.
 
 ---
 
@@ -92,6 +93,13 @@ node src/scripts/loadTest.js
 
 ---
 
+## 📚 Documentation Index
+| Doc | Description |
+| :--- | :--- |
+| **[SETUP.md](./docs/SETUP.md)** | 🛠️ Step-by-step installation & troubleshooting. |
+| **[FLOW.md](./docs/FLOW.md)** | 🌊 Deep dive into Architecture & Atomic Logic. |
+| **[CASES.md](./docs/CASES.md)** | 🧪 QA Playbook & Failure Scenarios. |
+
 ## 📂 Project Structure
 ```
 limitguard/
@@ -101,6 +109,6 @@ limitguard/
 │   ├── middleware/
 │   │   └── rateLimiter.js      # 🛡️ Fail-Open Logic
 │   └── server.js               # 🚀 HTTPS Gateway
-├── dashboard/                  # 📊 Next.js Visualization
+├── dashboard/                  # 📊 Next.js Visualization (Dynamic)
 └── docker-compose.yml          # 🐳 Infrastructure
 ```
