@@ -67,14 +67,15 @@ app.get('/api/status', async (req, res) => {
     let latency = 0;
 
     try {
-        if (redisClient.status === 'ready') {
-            await redisClient.ping();
-            isRedisConnected = true;
-            const diff = process.hrtime(start);
-            latency = (diff[0] * 1000 + diff[1] / 1e6).toFixed(2); // ms
-        }
+        // Force a PING to check actual connectivity
+        // ioredis 'status' property can sometimes lag or be 'connecting'
+        await redisClient.ping();
+        isRedisConnected = true;
+        const diff = process.hrtime(start);
+        latency = (diff[0] * 1000 + diff[1] / 1e6).toFixed(2); // ms
     } catch (e) {
         isRedisConnected = false;
+        // console.log("Redis Ping Failed:", e.message);
     }
 
     res.json({

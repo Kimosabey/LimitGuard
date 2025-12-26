@@ -54,6 +54,8 @@ NEXT_PUBLIC_API_URL=https://<YOUR_LAN_IP>:4000/api/test
 - **Fix:** Click "Advanced" -> "Proceed to localhost (unsafe)" for **BOTH**:
     - `https://localhost:3000`
     - `https://localhost:4000/api/test` (You must visit the API directly once to accept the cert).
+- **LimitGuard Redis:** `localhost:6380` (Changed from 6379 to avoid conflicts)
+- **Redis Commander:** `http://localhost:8081`
 
 **2. "Redis Connection Failed"**
 - Ensure Docker is running.

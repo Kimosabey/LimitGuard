@@ -110,20 +110,31 @@ export default function Dashboard() {
     try {
       const res = await axios.get(process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api/test');
       syncTimer(res.headers);
-      toast.success('Allowed (200 OK)', {
-        id: loadingToast,
-        style: { border: '1px solid #10b981', color: '#10b981', background: '#0f172a' }
-      });
+      toast.success(
+        <span className="flex items-center gap-2">
+          <span className="material-symbols-outlined text-lg">check_circle</span>
+          Allowed (200 OK)
+        </span>,
+        {
+          id: loadingToast,
+          style: { border: '1px solid #10b981', color: '#10b981', background: '#0f172a' }
+        }
+      );
     } catch (err) {
       if (err.response) {
         syncTimer(err.response.headers);
         if (err.response.status === 429) {
           const resetIn = err.response.headers['x-ratelimit-reset'] || '?';
-          toast.error(`Blocked! Reset in ${resetIn}s`, {
-            id: loadingToast,
-            style: { border: '1px solid #ef4444', color: '#ef4444', background: '#0f172a' },
-            icon: '⏳'
-          });
+          toast.error(
+            <span className="flex items-center gap-2">
+              <span className="material-symbols-outlined text-lg">timer</span>
+              Blocked! Reset in {resetIn}s
+            </span>,
+            {
+              id: loadingToast,
+              style: { border: '1px solid #ef4444', color: '#ef4444', background: '#0f172a' }
+            }
+          );
         }
       } else {
         toast.error(`Error: ${err.message}`, { id: loadingToast });
@@ -137,14 +148,19 @@ export default function Dashboard() {
     setIsAttacking(true);
     const batchSize = 50;
 
-    toast('Launching 50 Requests...', {
-      icon: '🚀',
-      style: {
-        borderRadius: '10px',
-        background: '#333',
-        color: '#fff',
-      },
-    });
+    toast(
+      <span className="flex items-center gap-2">
+        <span className="material-symbols-outlined text-lg">rocket_launch</span>
+        Launching 50 Requests...
+      </span>,
+      {
+        style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      }
+    );
 
     // We only need one response to get the headers
     let headersCaptured = false;
@@ -171,15 +187,21 @@ export default function Dashboard() {
     const allowed = results.filter(r => r === 'allowed').length;
     const blocked = results.filter(r => r === 'blocked').length;
 
-    toast.success(`Attack Complete: ${allowed} Allowed, ${blocked} Blocked`, {
-      duration: 5000,
-      style: {
-        border: '1px solid #10b981',
-        padding: '16px',
-        color: '#10b981',
-        background: '#0f172a'
-      },
-    });
+    toast.success(
+      <span className="flex items-center gap-2">
+        <span className="material-symbols-outlined text-lg">fact_check</span>
+        Attack Complete: {allowed} Allowed, {blocked} Blocked
+      </span>,
+      {
+        duration: 5000,
+        style: {
+          border: '1px solid #10b981',
+          padding: '16px',
+          color: '#10b981',
+          background: '#0f172a'
+        },
+      }
+    );
 
     setTimeout(() => setIsAttacking(false), 2000); // Visual cooldown
   };

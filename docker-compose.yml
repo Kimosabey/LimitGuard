@@ -5,11 +5,11 @@ services:
     image: redis:alpine
     container_name: limitguard-redis
     ports:
-      - "6379:6379"
+      - "6380:6379"
     command: redis-server --appendonly yes
-    restart: always
+    # restart: always # Disabled to allow Fail-Open testing
 
-  # Optional: Redis Commander for UI (Senior dev touch)
+    # Optional: Redis Commander for UI (Senior dev touch)
   redis-commander:
     image: rediscommander/redis-commander:latest
     container_name: redis-ui
